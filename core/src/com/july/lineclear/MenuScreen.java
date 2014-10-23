@@ -88,7 +88,6 @@ public class MenuScreen extends ScreenAdapter {
 			// button click sound
 			if (start == event.getListenerActor()) {
 				game.setScreen(new LevelScreen(game));
-				dispose();
 			} else if (more == event.getListenerActor()) {
 				// show the score wall
 			} else if (exit == event.getListenerActor()) {

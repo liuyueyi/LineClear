@@ -1,10 +1,6 @@
 package com.july.lineclear;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 
@@ -31,18 +27,16 @@ public class LevelCellGroup extends Group {
 		}
 	}
 
-	public void setMoveOutAction() {
-		Action action1 = Actions.fadeOut(Gdx.graphics.getDeltaTime() * 10);
-		Action action2 = Actions.moveTo(-Constants.width, getY(),
-				Gdx.graphics.getDeltaTime() * 10);
-		this.addAction(Actions.parallel(action1, action2));
+	public void setMoveOutAction(int direction) {
+		for (LevelCell cell : array) {
+			cell.addMoveOutAction(direction);
+		}
+		array.clear();
 	}
-
-	@Override
-	public void draw(Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
-		if (getX() < -0.6f * Constants.width) {
-			this.clear();
+	
+	public void setMoveInAction(int direction) {
+		for (LevelCell cell : array) {
+			cell.addMoveInAction(direction);
 		}
 	}
 }

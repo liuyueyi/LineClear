@@ -38,7 +38,23 @@ public class Constants {
 	static float starWidth = 50 * hrate;
 	static float starHeight = starWidth;
 	
-	static int maxLevel = 1;
+	static int maxLevel = 40;
 	static int currentLevel = 1;
-			
+	
+	// game Constants
+	static float infoLabelWidth = 130 * wrate;
+	static float infoLabelHeight = infoLabelWidth / 4;
+	static float infoLabelY = 0.78f * height; 
+	static float levelX = 10;
+	static float scoreX = levelX + infoLabelWidth;
+	static float bestX = scoreX + infoLabelWidth;
+	static float pauseWidth = 40 * wrate;
+	static float pauseHeight = infoLabelHeight;
+	static float pauseX = bestX + infoLabelWidth + pauseWidth * 0.5f;
+	
+	static float timeWidth = width - 10;
+	static float timeHeight = 10;
+	static float timeX = 10;
+	static float timeY = infoLabelY - 12;
+	
 }
