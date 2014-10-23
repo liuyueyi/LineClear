@@ -29,9 +29,16 @@ public class Constants {
 	//level Constants
 	static float levelBgWidth = 420 * wrate;
 	static float levelBgHeight = levelBgWidth / 6f;
+	static float levelBgAddY = (height - 2*adHeight - 8 * levelBgHeight) / 9f;
+	static float levelBgX = 30 * wrate;
+	static float levelBgY = height - adHeight -levelBgAddY - levelBgHeight;
+	
 	static float lockHeight = 60 * hrate;
 	static float lockWidth = 60 * wrate;
 	static float starWidth = 50 * hrate;
 	static float starHeight = starWidth;
+	
+	static int maxLevel = 1;
+	static int currentLevel = 1;
 			
 }

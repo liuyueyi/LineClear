@@ -1,6 +1,9 @@
 package com.july.lineclear;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -12,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class AssetManager {
 	public static AssetManager instance;
+	
+	public BitmapFont font;
 
 	public TextureAtlas[] atlas;
 	// menu resource
@@ -65,6 +70,12 @@ public class AssetManager {
 	}
 
 	public void loadTexture() {
+		Texture fonTexture = new Texture(Gdx.files.internal("font/font.png"));
+		fonTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		font = new BitmapFont(Gdx.files.internal("font/font.fnt"),
+				new TextureRegion(fonTexture), false);
+		font.setScale(Constants.hrate);
+		
 		atlas = new TextureAtlas[3];
 		atlas[0] = new TextureAtlas(Gdx.files.internal("gfx/menu/menu.pack"));
 		menuBg = atlas[0].findRegion("menubg");

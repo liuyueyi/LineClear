@@ -5,47 +5,125 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-public class LevelScreen extends ScreenAdapter {
+public class LevelScreen extends ScreenAdapter implements GestureListener {
 	MainGame game;
-	
+
 	private TextureRegion bg;
 	private SpriteBatch batch;
 	private Stage stage;
-	//private ArrayList<LevelCell> arrays;
-	
-	public LevelScreen(MainGame game){
+
+	LevelCellGroup group;
+	LevelCellGroup nextGroup;
+	int currentPage = 0;
+
+	public LevelScreen(MainGame game) {
 		this.game = game;
 	}
-	
-	
+
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
 		stage = new Stage();
 		bg = AssetManager.getInstance().menuBg;
-		
-		LevelCell cell = new LevelCell();
-		cell.setPosition(20, 100);
-		stage.addActor(cell);
+
+		group = new LevelCellGroup(1 + 8 * currentPage);
+		stage.addActor(group);
+		Gdx.input.setInputProcessor(new GestureDetector(this));
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		// update();
+
 		batch.begin();
 		batch.draw(bg, 0, 0, Constants.width, Constants.height);
 		batch.end();
-		
+
 		stage.draw();
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
+		stage.dispose();
 
+	}
+
+	@Override
+	public boolean touchDown(float x, float y, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean tap(float x, float y, int count, int button) {
+		// TODO Auto-generated method stub
+		y = Constants.height - y;
+		for (LevelCell cell : group.array) {
+			if (cell.clicked(x, y)) {
+				Gdx.app.log("wzb", "level " + cell.getLevel() + " selected!");
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean longPress(float x, float y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean fling(float velocityX, float velocityY, int button) {
+		// TODO Auto-generated method stub
+		Gdx.app.log("wzb", "fling");
+		if (velocityX < 5f) {
+			if (currentPage != 3) {
+				++currentPage;
+				nextGroup = new LevelCellGroup(1 + currentPage * 8);
+				group.setMoveOutAction();
+				group = nextGroup;
+			}
+		} else if (velocityX > -5f) {
+			if (currentPage != 0) {
+				--currentPage;
+				nextGroup = new LevelCellGroup(1 + currentPage * 8);
+				group.setMoveOutAction();
+				group = nextGroup;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean pan(float x, float y, float deltaX, float deltaY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean panStop(float x, float y, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean zoom(float initialDistance, float distance) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
+			Vector2 pointer1, Vector2 pointer2) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
