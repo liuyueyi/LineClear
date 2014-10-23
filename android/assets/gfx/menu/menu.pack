@@ -1,0 +1,103 @@
+
+menu.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+menubg
+  rotate: false
+  xy: 1, 115
+  size: 570, 900
+  orig: 570, 900
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 573, 335
+  size: 240, 680
+  orig: 240, 680
+  offset: 0, 0
+  index: -1
+levelbg
+  rotate: false
+  xy: 1, 1
+  size: 623, 112
+  orig: 623, 112
+  offset: 0, 0
+  index: -1
+go
+  rotate: false
+  xy: 815, 903
+  size: 157, 112
+  orig: 157, 112
+  offset: 0, 0
+  index: -1
+exit
+  rotate: false
+  xy: 573, 256
+  size: 167, 77
+  orig: 167, 77
+  offset: 0, 0
+  index: -1
+more
+  rotate: false
+  xy: 573, 177
+  size: 167, 77
+  orig: 167, 77
+  offset: 0, 0
+  index: -1
+start
+  rotate: false
+  xy: 815, 824
+  size: 167, 77
+  orig: 167, 77
+  offset: 0, 0
+  index: -1
+lian
+  rotate: false
+  xy: 815, 722
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+meng
+  rotate: false
+  xy: 815, 620
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+lock
+  rotate: false
+  xy: 815, 538
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 815, 463
+  size: 75, 73
+  orig: 75, 73
+  offset: 0, 0
+  index: 0
+star
+  rotate: false
+  xy: 815, 388
+  size: 75, 73
+  orig: 75, 73
+  offset: 0, 0
+  index: 1
+menu_sound_off
+  rotate: false
+  xy: 742, 285
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+menu_sound_on
+  rotate: false
+  xy: 573, 127
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
