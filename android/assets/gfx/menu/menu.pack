@@ -5,14 +5,14 @@ filter: Nearest,Nearest
 repeat: none
 menubg
   rotate: false
-  xy: 1, 115
+  xy: 1, 89
   size: 570, 900
   orig: 570, 900
   offset: 0, 0
   index: -1
 title
   rotate: false
-  xy: 573, 335
+  xy: 573, 309
   size: 240, 680
   orig: 240, 680
   offset: 0, 0
@@ -20,83 +20,83 @@ title
 levelbg
   rotate: false
   xy: 1, 1
-  size: 623, 112
-  orig: 623, 112
+  size: 480, 86
+  orig: 480, 86
   offset: 0, 0
   index: -1
 go
   rotate: false
-  xy: 815, 903
+  xy: 573, 195
   size: 157, 112
   orig: 157, 112
   offset: 0, 0
   index: -1
 exit
   rotate: false
-  xy: 573, 256
+  xy: 815, 912
   size: 167, 77
   orig: 167, 77
   offset: 0, 0
   index: -1
 more
   rotate: false
-  xy: 573, 177
+  xy: 815, 833
   size: 167, 77
   orig: 167, 77
   offset: 0, 0
   index: -1
 start
   rotate: false
-  xy: 815, 824
+  xy: 815, 754
   size: 167, 77
   orig: 167, 77
   offset: 0, 0
   index: -1
 lian
   rotate: false
-  xy: 815, 722
+  xy: 573, 93
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 meng
   rotate: false
-  xy: 815, 620
+  xy: 815, 652
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-lock
+levelbg_lock
   rotate: false
-  xy: 815, 538
-  size: 80, 80
-  orig: 80, 80
+  xy: 483, 1
+  size: 480, 86
+  orig: 480, 86
   offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 815, 463
+  xy: 732, 234
   size: 75, 73
   orig: 75, 73
   offset: 0, 0
   index: 0
 star
   rotate: false
-  xy: 815, 388
+  xy: 815, 577
   size: 75, 73
   orig: 75, 73
   offset: 0, 0
   index: 1
 menu_sound_off
   rotate: false
-  xy: 742, 285
+  xy: 675, 145
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 menu_sound_on
   rotate: false
-  xy: 573, 127
+  xy: 917, 704
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
