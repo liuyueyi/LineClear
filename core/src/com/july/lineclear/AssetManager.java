@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -89,7 +90,7 @@ public class AssetManager {
 		font = new BitmapFont(Gdx.files.internal("font/font.fnt"),
 				new TextureRegion(fonTexture), false);
 		font.setScale(Constants.hrate);
-		style = new LabelStyle(font, font.getColor());
+		style = new LabelStyle(font, Color.WHITE);
 
 		defaultFont = new BitmapFont();
 
@@ -164,13 +165,13 @@ public class AssetManager {
 
 	}
 
-	public void loadRecord(){
+	public void loadRecord() {
 		maxLevel = 30;
 		currentLevel = 30;
-		for(int i = 0; i < 48; i++){
+		for (int i = 0; i < 48; i++) {
 			Vector<Integer> v = new Vector<Integer>();
-			v.add((i+1) * 2000);
-			v.add((int)(Math.random() * 3 + 1));
+			v.add((i + 1) * 2000);
+			v.add((int) (Math.random() * 3 + 1));
 			record.put(i + 1, v);
 		}
 	}

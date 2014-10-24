@@ -116,12 +116,25 @@ public class GameScreen extends ScreenAdapter {
 					if (leftCellNum == 0) {
 						// 闯关成功
 						Gdx.app.log("wzb", "succeed!");
+						AssetManager.getInstance().record.get(levelNum).indexOf(0) = bestNum;
+						AssetManager.getInstance().record.get(levelNum).indexOf(1) = starNum;
 					}
 					// 添加分数
 					if (countTime > 0)
 						count++;
 					else
 						count = 1;
+					// update the star number
+					if (count >= 8)
+						starNum = 3;
+					else if (count >= 5) {
+						if (starNum < 2)
+							starNum = 2;
+					} else if (count >= 3) {
+						if (starNum == 0)
+							starNum = 1;
+					}
+
 					countTime = 3;
 					scoreNum += 100 * count;
 					score.setText("" + scoreNum);
@@ -130,7 +143,7 @@ public class GameScreen extends ScreenAdapter {
 						best.setText("" + bestNum);
 					}
 
-					TipActor tip = new TipActor(count, x, y);
+					TipGroup tip = new TipGroup(count, x, y);
 					// stage.addActor(tip.scoreLabel);
 					stage.addActor(tip);
 
