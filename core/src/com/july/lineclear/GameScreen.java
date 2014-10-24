@@ -5,9 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 public class GameScreen extends ScreenAdapter {
 	MainGame game;
@@ -29,6 +30,9 @@ public class GameScreen extends ScreenAdapter {
 	LabelStyle style[];
 	Image pause;
 	TextureRegionDrawable trd[];
+
+	GameCellGroup gameCells;
+	Array<Vector2> line;
 
 	public GameScreen(MainGame game, int level) {
 		this.game = game;
@@ -80,12 +84,30 @@ public class GameScreen extends ScreenAdapter {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				// show pause dialog
+				Gdx.app.log("wzb", "pause button clicked!");
 			}
 		});
 		stage.addActor(pause);
 
 		timeBg = AssetManager.getInstance().timeBg;
 		timeFill = AssetManager.getInstance().timeFill[1];
+
+		line = new Array<Vector2>();
+		gameCells = new GameCellGroup();
+		gameCells.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				int column = (int) ((x - Constants.cellX) / Constants.cellWidth);
+				int row = (int) ((y - Constants.cellY) / Constants.cellHeight);
+				Gdx.app.log("wzb", "click row = " + row + " column = " + column);
+				if (gameCells.clicked(row, column, line)) {
+					for (Vector2 v : line) {
+						Gdx.app.log("wzb", "v x = " + v.x + " y = " + v.y);
+					}
+				}
+			}
+		});
+		stage.addActor(gameCells);
 		Gdx.input.setInputProcessor(stage);
 	}
 

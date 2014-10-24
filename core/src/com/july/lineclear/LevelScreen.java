@@ -76,7 +76,7 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 		// TODO Auto-generated method stub
 		y = Constants.height - y;
 		for (LevelCell cell : group.array) {
-			if (cell.clicked(x, y) && cell.getLevel() != -1) {
+			if (cell.isClicked(x, y) && cell.getLevel() != -1) {
 				dispose();
 				game.setScreen(new GameScreen(game, cell.getLevel()));
 			}

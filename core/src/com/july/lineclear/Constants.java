@@ -57,4 +57,9 @@ public class Constants {
 	static float timeX = 10;
 	static float timeY = infoLabelY - 12;
 	
+	static float cellWidth = width / (GameCellGroup.COLUMN + 1);
+	static float cellHeight = cellWidth;
+	static float cellX = cellWidth / 2;
+	static float cellY = adHeight;
+	
 }

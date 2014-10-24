@@ -113,7 +113,7 @@ public class LevelCell extends Actor {
 	 *            点击的y坐标
 	 * @return true表示选中； false表示没选中
 	 */
-	public boolean clicked(float x, float y) {
+	public boolean isClicked(float x, float y) {
 		return x >= getX() && x < getX() + getWidth() && y >= getY()
 				&& y < getY() + getHeight() ? true : false;
 	}
