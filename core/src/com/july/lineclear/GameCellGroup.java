@@ -304,12 +304,12 @@ public class GameCellGroup extends Group {
 		int u = getUpIndexOfColumn(minRow, maxRow, maxColumn);
 		if (u == maxRow)
 			return false;
-		int i = minRow + 1;
-		while (i < u) {
+		int i = minRow ;
+		do{
+			i++;
 			if (cells[i][minColumn].getType() != EMPTY)
 				return false;
-			i++;
-		}
+		}while (i < u);
 		while (i < maxRow) {
 			if (judgeRow(i, maxColumn, minColumn))
 				return initArrayV(array, i, maxRow, maxColumn, minRow,

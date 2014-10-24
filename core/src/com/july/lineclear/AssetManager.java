@@ -1,11 +1,16 @@
 package com.july.lineclear;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 /**
  * resource management class. Use single instance design model
@@ -17,6 +22,7 @@ public class AssetManager {
 	public static AssetManager instance;
 
 	public BitmapFont font;
+	public LabelStyle style;
 	public BitmapFont defaultFont;
 
 	public TextureAtlas[] atlas;
@@ -50,7 +56,8 @@ public class AssetManager {
 
 	public TextureRegion selected;
 	public TextureRegion[] animals;
-	public TextureRegion[] line;
+	public TextureRegion[] hLine;
+	public TextureRegion[] vLine;
 
 	// result resource
 	public TextureRegion resultBg;
@@ -59,6 +66,11 @@ public class AssetManager {
 	public TextureRegion[] continueBtn;
 	public TextureRegion[] returnBtn;
 	public TextureRegion[] zan;
+
+	// recored
+	public int maxLevel = 30;
+	public int currentLevel = 1;
+	public Map<Integer, Vector<Integer>> record;
 
 	private AssetManager() {
 
@@ -77,7 +89,8 @@ public class AssetManager {
 		font = new BitmapFont(Gdx.files.internal("font/font.fnt"),
 				new TextureRegion(fonTexture), false);
 		font.setScale(Constants.hrate);
-		
+		style = new LabelStyle(font, font.getColor());
+
 		defaultFont = new BitmapFont();
 
 		atlas = new TextureAtlas[3];
@@ -114,9 +127,12 @@ public class AssetManager {
 		pause = atlas[1].findRegion("pause");
 		selected = atlas[1].findRegion("select");
 
-		line = new TextureRegion[6];
-		for (int i = 0; i < 6; i++)
-			line[i] = atlas[1].findRegion("l", i);
+		vLine = new TextureRegion[3];
+		for (int i = 0; i < 3; i++)
+			vLine[i] = atlas[1].findRegion("l", i);
+		hLine = new TextureRegion[3];
+		for (int i = 3; i < 6; i++)
+			hLine[i - 3] = atlas[1].findRegion("l", i);
 
 		animals = new TextureRegion[10];
 		for (int i = 1; i < 11; i++)
@@ -131,18 +147,35 @@ public class AssetManager {
 		succeed = atlas[2].findRegion("succeed");
 		failed = atlas[2].findRegion("fail");
 		continueBtn = new TextureRegion[2];
-		continueBtn[0] = atlas[0].findRegion("continue", 0);
-		continueBtn[1] = atlas[0].findRegion("continue", 1);
+		continueBtn[0] = atlas[2].findRegion("continue", 0);
+		continueBtn[1] = atlas[2].findRegion("continue", 1);
 		returnBtn = new TextureRegion[2];
-		returnBtn[0] = atlas[0].findRegion("return", 0);
-		returnBtn[1] = atlas[1].findRegion("return", 1);
+		returnBtn[0] = atlas[2].findRegion("return", 0);
+		returnBtn[1] = atlas[2].findRegion("return", 1);
 		zan = new TextureRegion[5];
 		for (int i = 0; i < 5; i++)
-			zan[i] = atlas[1].findRegion("zan", i);
+			zan[i] = atlas[2].findRegion("zan", i);
 
+		record = new HashMap<Integer, Vector<Integer>>();
+		loadRecord();
 	}
 
 	public void loadMusic() {
+
+	}
+
+	public void loadRecord(){
+		maxLevel = 30;
+		currentLevel = 30;
+		for(int i = 0; i < 48; i++){
+			Vector<Integer> v = new Vector<Integer>();
+			v.add((i+1) * 2000);
+			v.add((int)(Math.random() * 3 + 1));
+			record.put(i + 1, v);
+		}
+	}
+
+	public void dumpRecord() {
 
 	}
 

@@ -14,10 +14,12 @@ public class LevelCellGroup extends Group {
 		array = new Array<LevelCell>();
 		for (int i = 0; i < 8; i++) {
 			LevelCell cell = Pools.obtain(LevelCell.class);
-			if (baseLevel + i <= Constants.maxLevel) {
+			if (baseLevel + i <= AssetManager.getInstance().maxLevel) {
 				cell.setLevel(baseLevel + i);
-				cell.setScore(1000);
-				cell.setStar(2);
+				cell.setScore(AssetManager.getInstance().record.get(
+						baseLevel + i).get(0));
+				cell.setStar(AssetManager.getInstance().record.get(
+						baseLevel + i).get(1));
 			}
 			cell.setBounds(Constants.levelBgX, Constants.levelBgY - i
 					* (Constants.levelBgHeight + Constants.levelBgAddY),
@@ -33,7 +35,7 @@ public class LevelCellGroup extends Group {
 		}
 		array.clear();
 	}
-	
+
 	public void setMoveInAction(int direction) {
 		for (LevelCell cell : array) {
 			cell.addMoveInAction(direction);

@@ -38,8 +38,8 @@ public class Constants {
 	static float starWidth = 50 * hrate;
 	static float starHeight = starWidth;
 	
-	static int maxLevel = 40;
-	static int currentLevel = 1;
+//	static int maxLevel = 40;
+//	static int currentLevel = 1;
 	
 	// game Constants
 	static float infoLabelWidth = 130 * wrate;
