@@ -101,9 +101,7 @@ public class GameScreen extends ScreenAdapter {
 				int row = (int) ((y - Constants.cellY) / Constants.cellHeight);
 				Gdx.app.log("wzb", "click row = " + row + " column = " + column);
 				if (gameCells.clicked(row, column, line)) {
-					for (Vector2 v : line) {
-						Gdx.app.log("wzb", "v x = " + v.x + " y = " + v.y);
-					}
+					// ÏÔÊ¾Ïû³ýÏß
 				}
 			}
 		});
