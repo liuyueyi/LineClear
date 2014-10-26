@@ -23,7 +23,7 @@ public class TipGroup extends Group {
 	}
 
 	public void init(int count, float x, float y) {
-		scoreLabel = new Label(100 * count + "",
+		scoreLabel = new Label(50 * count + "",
 				AssetManager.getInstance().style);
 		scoreLabel.setPosition(0, 0);
 		scoreLabel.setSize(Constants.cellWidth, Constants.cellHeight);

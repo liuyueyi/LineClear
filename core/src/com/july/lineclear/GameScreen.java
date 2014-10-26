@@ -51,7 +51,7 @@ public class GameScreen extends ScreenAdapter {
 		bestNum = AssetManager.getInstance().record.get(level).get(0);
 		starNum = AssetManager.getInstance().record.get(level).get(1);
 
-		baseTime = 200 - level * 10;
+		baseTime = 80 - level * 50f / AssetManager.getInstance().totalLevel;
 		time = baseTime;
 	}
 
@@ -110,7 +110,7 @@ public class GameScreen extends ScreenAdapter {
 		timeFill = AssetManager.getInstance().timeFill[1];
 
 		line = new Array<Vector2>();
-		gameCells = new GameCellGroup();
+		gameCells = new GameCellGroup(levelNum);
 		gameCells.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -182,10 +182,13 @@ public class GameScreen extends ScreenAdapter {
 			count++;
 		else
 			count = 1;
+
+		if (count >= 3 && time < baseTime)
+			time += Gdx.graphics.getDeltaTime();
 		// update the star number
-		if (count >= 8)
+		if (count >= 9)
 			starNum = 3;
-		else if (count >= 5) {
+		else if (count >= 6) {
 			if (starNum < 2)
 				starNum = 2;
 		} else if (count >= 3) {
@@ -193,8 +196,8 @@ public class GameScreen extends ScreenAdapter {
 				starNum = 1;
 		}
 
-		countTime = 3;
-		scoreNum += 100 * count;
+		countTime = 2;
+		scoreNum += 50 * count;
 		score.setText("" + scoreNum);
 		if (scoreNum > bestNum) {
 			bestNum = scoreNum;

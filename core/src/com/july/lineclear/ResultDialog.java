@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ResultDialog {
@@ -48,9 +49,10 @@ public class ResultDialog {
 		dialogStage.addActor(returnBtn);
 
 		scoreLabel = new Label("", AssetManager.getInstance().scoreStyle);
-		scoreLabel.setBounds(Constants.resultX, Constants.btnY
+		scoreLabel.setBounds(Constants.resultX, Constants.btnY + 10
 				+ Constants.btnHeight, Constants.resultWidth,
 				Constants.infoHeight);
+		scoreLabel.setAlignment(Align.center);
 		dialogStage.addActor(scoreLabel);
 
 	}
@@ -65,7 +67,7 @@ public class ResultDialog {
 			title = AssetManager.getInstance().failed;
 			break;
 		case PAUSE:
-			title = AssetManager.getInstance().failed;
+			title = AssetManager.getInstance().rest;
 			break;
 		}
 	}

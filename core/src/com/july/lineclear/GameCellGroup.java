@@ -15,10 +15,13 @@ public class GameCellGroup extends Group {
 	int lastRow = EMPTY;
 	int lastColumn = EMPTY;
 
-	public GameCellGroup() {
+	public GameCellGroup(int level) {
+		int max = 10 + level / 8;
+		if (max > 16)
+			max = 16;
 		Array<Integer> array = new Array<Integer>();
 		for (int i = 0; i < 28; i++) {
-			array.add((int) (Math.random() * 10));
+			array.add((int) (Math.random() * max));
 		}
 		array.addAll(array);
 		array.shuffle();
@@ -304,12 +307,12 @@ public class GameCellGroup extends Group {
 		int u = getUpIndexOfColumn(minRow, maxRow, maxColumn);
 		if (u == maxRow)
 			return false;
-		int i = minRow ;
-		do{
+		int i = minRow;
+		do {
 			i++;
 			if (cells[i][minColumn].getType() != EMPTY)
 				return false;
-		}while (i < u);
+		} while (i < u);
 		while (i < maxRow) {
 			if (judgeRow(i, maxColumn, minColumn))
 				return initArrayV(array, i, maxRow, maxColumn, minRow,

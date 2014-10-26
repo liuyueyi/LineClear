@@ -67,7 +67,7 @@ public class Constants {
 	static float resultHeight = resultWidth * 408f / 450f;
 	static float resultX = (width - resultWidth) / 2f;
 	static float resultY = (height - resultHeight) / 2f;
-	static float starX = resultX + (resultWidth - 5 * starWidth) / 2;
+	static float starX = resultX + (resultWidth - 4 * starWidth) / 2;
 	static float starAddX = starWidth * 1.5f;
 	static float starY = resultY + (340 - 2* starHeight) / 405f * resultHeight;
 	static float infoWidth = 320f / 450f * resultWidth;

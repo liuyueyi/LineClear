@@ -94,56 +94,56 @@ select
   orig: 120, 120
   offset: 0, 0
   index: -1
-2
+11
   rotate: false
   xy: 743, 877
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-3
+12
   rotate: false
   xy: 611, 745
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-4
+13
   rotate: false
   xy: 611, 623
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-5
+14
   rotate: false
   xy: 611, 501
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-6
+15
   rotate: false
   xy: 573, 379
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-7
+16
   rotate: false
   xy: 573, 257
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-8
+2
   rotate: false
   xy: 573, 135
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-9
+3
   rotate: false
   xy: 865, 877
   size: 120, 120
@@ -171,9 +171,51 @@ score
   orig: 197, 49
   offset: 0, 0
   index: -1
+4
+  rotate: false
+  xy: 733, 602
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 733, 480
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 695, 358
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 695, 236
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 695, 114
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+9
+  rotate: false
+  xy: 855, 602
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
 pause
   rotate: false
-  xy: 733, 642
+  xy: 855, 520
   size: 40, 80
   orig: 40, 80
   offset: 0, 0

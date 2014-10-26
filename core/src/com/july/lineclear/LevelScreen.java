@@ -32,7 +32,8 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 		stage = new Stage();
 		bg = AssetManager.getInstance().menuBg;
 
-		group = new LevelCellGroup(1 + 8 * currentPage);
+		currentPage = (AssetManager.getInstance().maxLevel - 1) / 8;
+		group = new LevelCellGroup(currentPage * 8 + 1);
 		stage.addActor(group);
 		Gdx.input.setInputProcessor(new GestureDetector(this));
 		Gdx.input.setCatchBackKey(true);
@@ -94,7 +95,7 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 	public boolean fling(float velocityX, float velocityY, int button) {
 		// TODO Auto-generated method stub
 		if (velocityX < 5f) {
-			if (currentPage != 5) {
+			if (currentPage != AssetManager.getInstance().totalLevel / 8 - 1) {
 				++currentPage;
 				nextGroup = new LevelCellGroup(1 + currentPage * 8);
 				stage.addActor(nextGroup);
