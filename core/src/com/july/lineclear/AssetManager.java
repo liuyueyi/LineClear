@@ -23,7 +23,7 @@ public class AssetManager {
 	public static AssetManager instance;
 
 	public BitmapFont font;
-	public LabelStyle style;
+	public LabelStyle style, scoreStyle;
 	public BitmapFont defaultFont;
 
 	public TextureAtlas[] atlas;
@@ -90,9 +90,10 @@ public class AssetManager {
 		font = new BitmapFont(Gdx.files.internal("font/font.fnt"),
 				new TextureRegion(fonTexture), false);
 		font.setScale(Constants.hrate);
-		style = new LabelStyle(font, Color.WHITE);
+		scoreStyle = new LabelStyle(font, font.getColor());
 
 		defaultFont = new BitmapFont();
+		style = new LabelStyle(defaultFont, Color.WHITE);
 
 		atlas = new TextureAtlas[3];
 		atlas[0] = new TextureAtlas(Gdx.files.internal("gfx/menu/menu.pack"));
@@ -176,7 +177,27 @@ public class AssetManager {
 		}
 	}
 
-	public void dumpRecord() {
+	public void updateRecord(int level, int score, int star) {
+		currentLevel++;
+		if (level == maxLevel && level < 48)
+			maxLevel++;
+
+		boolean updated = false;
+		if (record.get(level).indexOf(0) < score) {
+			record.get(level).setElementAt(score, 0);
+			updated = true;
+		}
+
+		if (record.get(level).indexOf(1) < star) {
+			record.get(level).setElementAt(star, 1);
+			updated = true;
+		}
+
+		if (updated)
+			saveRecord();
+	}
+
+	public void saveRecord() {
 
 	}
 

@@ -42,9 +42,17 @@ public class GameScreen extends ScreenAdapter {
 
 	int leftCellNum = GameCellGroup.ROW * GameCellGroup.COLUMN; // 剩余单元的个数
 
+	ResultDialog resultDialog;
+
 	public GameScreen(MainGame game, int level) {
 		this.game = game;
 		AssetManager.getInstance().currentLevel = level;
+		levelNum = level;
+		bestNum = AssetManager.getInstance().record.get(level).get(0);
+		starNum = AssetManager.getInstance().record.get(level).get(1);
+
+		baseTime = 200 - level * 10;
+		time = baseTime;
 	}
 
 	@Override
@@ -65,7 +73,6 @@ public class GameScreen extends ScreenAdapter {
 				new LabelStyle(AssetManager.getInstance().defaultFont,
 						Color.NAVY) };
 		style[0].background = trd[2];
-		levelNum = AssetManager.getInstance().currentLevel;
 		level = new Label("" + levelNum, style[0]);
 		level.setAlignment(Align.center);
 		level.setBounds(Constants.levelX, Constants.infoLabelY,
@@ -80,7 +87,6 @@ public class GameScreen extends ScreenAdapter {
 		stage.addActor(score);
 
 		style[2].background = trd[1];
-		bestNum = AssetManager.getInstance().record.get(levelNum).get(0);
 		best = new Label("" + bestNum, style[2]);
 		best.setAlignment(Align.center);
 		best.setBounds(Constants.bestX, Constants.infoLabelY,
@@ -94,7 +100,8 @@ public class GameScreen extends ScreenAdapter {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				// show pause dialog
-				Gdx.app.log("wzb", "pause button clicked!");
+				// Gdx.app.log("wzb", "pause button clicked!");
+				resultDialog.show(ResultDialog.PAUSE, 0, 0);
 			}
 		});
 		stage.addActor(pause);
@@ -109,59 +116,30 @@ public class GameScreen extends ScreenAdapter {
 			public void clicked(InputEvent event, float x, float y) {
 				int column = (int) ((x - Constants.cellX) / Constants.cellWidth);
 				int row = (int) ((y - Constants.cellY) / Constants.cellHeight);
-				// Gdx.app.log("wzb", "click row = " + row + " column = " +
-				// column);
 				if (gameCells.clicked(row, column, line)) { // 消除
-					leftCellNum -= 2;
-					if (leftCellNum == 0) {
-						// 闯关成功
-						Gdx.app.log("wzb", "succeed!");
-						AssetManager.getInstance().record.get(levelNum).indexOf(0) = bestNum;
-						AssetManager.getInstance().record.get(levelNum).indexOf(1) = starNum;
-					}
-					// 添加分数
-					if (countTime > 0)
-						count++;
-					else
-						count = 1;
-					// update the star number
-					if (count >= 8)
-						starNum = 3;
-					else if (count >= 5) {
-						if (starNum < 2)
-							starNum = 2;
-					} else if (count >= 3) {
-						if (starNum == 0)
-							starNum = 1;
-					}
-
-					countTime = 3;
-					scoreNum += 100 * count;
-					score.setText("" + scoreNum);
-					if (scoreNum > bestNum) {
-						bestNum = scoreNum;
-						best.setText("" + bestNum);
-					}
-
-					TipGroup tip = new TipGroup(count, x, y);
-					// stage.addActor(tip.scoreLabel);
-					stage.addActor(tip);
-
-					// 显示消除线
-					lineActor = Pools.obtain(LineActor.class);
-					lineActor.setArray(line);
-					stage.addActor(lineActor);
+					removeCells(x, y);
 				}
 			}
 		});
 		stage.addActor(gameCells);
 		Gdx.input.setInputProcessor(stage);
+
+		resultDialog = new ResultDialog(this);
 	}
 
 	@Override
 	public void render(float duration) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		if (!resultDialog.show) {
+			time -= Gdx.graphics.getDeltaTime();
+			if (time < 0) {
+				// 失败
+				time = 0;
+				resultDialog.show(ResultDialog.LOSE, scoreNum, 0);
+			}
+		}
+
 		if (countTime > 0)
 			countTime -= Gdx.graphics.getDeltaTime();
 
@@ -174,16 +152,70 @@ public class GameScreen extends ScreenAdapter {
 		batch.draw(timeBg, Constants.timeX, Constants.timeY,
 				Constants.timeWidth, Constants.timeHeight);
 		batch.draw(timeFill, Constants.timeX, Constants.timeY,
-				Constants.timeWidth * 0.6f, Constants.timeHeight);
+				Constants.timeWidth * (time / baseTime), Constants.timeHeight);
 		batch.end();
 
 		stage.draw();
 		stage.act();
+
+		resultDialog.draw(batch);
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
 		stage.dispose();
+		resultDialog.dispose();
+	}
+
+	/**
+	 * 点击的两个图片可以消除时，调用 更新分数，星星数，显示荣誉称号，消除线，判断是否成功晋级（是，则显示成功的对话框，并更新保存最后的结果）
+	 * 
+	 * @param x
+	 *            : 显示荣誉称号的坐标x
+	 * @param y
+	 *            : 显示荣誉称号的坐标y
+	 */
+	public void removeCells(float x, float y) {
+		// 添加分数
+		if (countTime > 0)
+			count++;
+		else
+			count = 1;
+		// update the star number
+		if (count >= 8)
+			starNum = 3;
+		else if (count >= 5) {
+			if (starNum < 2)
+				starNum = 2;
+		} else if (count >= 3) {
+			if (starNum == 0)
+				starNum = 1;
+		}
+
+		countTime = 3;
+		scoreNum += 100 * count;
+		score.setText("" + scoreNum);
+		if (scoreNum > bestNum) {
+			bestNum = scoreNum;
+			best.setText("" + bestNum);
+		}
+
+		TipGroup tip = new TipGroup(count, x, y);
+		stage.addActor(tip);
+
+		// 显示消除线
+		lineActor = Pools.obtain(LineActor.class);
+		lineActor.setArray(line);
+		stage.addActor(lineActor);
+
+		leftCellNum -= 2;
+		if (leftCellNum == 0) {
+			// 闯关成功,更新成绩和星星数
+			Gdx.app.log("wzb", "succeed!");
+			AssetManager.getInstance()
+					.updateRecord(levelNum, scoreNum, starNum);
+			resultDialog.show(ResultDialog.WIN, scoreNum, starNum);
+		}
 	}
 }
