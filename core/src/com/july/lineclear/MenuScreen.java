@@ -53,7 +53,8 @@ public class MenuScreen extends ScreenAdapter {
 		start.addListener(clickListener);
 		stage.addActor(start);
 
-		sound = new Image(Constants.isSound ? trd[0] : trd[1]);
+		sound = new Image(AssetManager.getInstance().isSounding ? trd[0]
+				: trd[1]);
 		sound.setBounds(Constants.soundX, Constants.soundY,
 				Constants.soundWidth, Constants.soundHeight);
 		sound.addListener(clickListener);
@@ -77,7 +78,7 @@ public class MenuScreen extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		Gdx.app.log("wzb", "menuscreen dispose");
+		// Gdx.app.log("wzb", "menuscreen dispose");
 		batch.dispose();
 		stage.dispose();
 	}
@@ -86,6 +87,7 @@ public class MenuScreen extends ScreenAdapter {
 		@Override
 		public void clicked(InputEvent event, float x, float y) {
 			// button click sound
+			SoundManager.getInstance().play(SoundManager.btnMusic);
 			if (start == event.getListenerActor()) {
 				game.setScreen(new LevelScreen(game));
 			} else if (more == event.getListenerActor()) {
@@ -94,13 +96,14 @@ public class MenuScreen extends ScreenAdapter {
 				// exit the game
 			} else if (sound == event.getListenerActor()) {
 				// turn on the sound or turn off the sound
-				if (Constants.isSound) {
-					Constants.isSound = false;
+				if (AssetManager.getInstance().isSounding) {
+					SoundManager.getInstance().closeMusic();
 					sound.setDrawable(trd[1]);
 				} else {
-					Constants.isSound = true;
+					SoundManager.getInstance().openMusic();
 					sound.setDrawable(trd[0]);
 				}
+				AssetManager.getInstance().saveRecord();
 			}
 		}
 	};

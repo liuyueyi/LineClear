@@ -78,6 +78,7 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 		y = Constants.height - y;
 		for (LevelCell cell : group.array) {
 			if (cell.isClicked(x, y) && cell.getLevel() != -1) {
+				SoundManager.getInstance().play(SoundManager.btnMusic);
 				dispose();
 				game.setScreen(new GameScreen(game, cell.getLevel()));
 			}
@@ -95,6 +96,7 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 	public boolean fling(float velocityX, float velocityY, int button) {
 		// TODO Auto-generated method stub
 		if (velocityX < 5f) {
+			SoundManager.getInstance().play(SoundManager.flingMusic);
 			if (currentPage != AssetManager.getInstance().totalLevel / 8 - 1) {
 				++currentPage;
 				nextGroup = new LevelCellGroup(1 + currentPage * 8);
@@ -104,6 +106,7 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 				group = nextGroup;
 			}
 		} else if (velocityX > -5f) {
+			SoundManager.getInstance().play(SoundManager.flingMusic);
 			if (currentPage != 0) {
 				--currentPage;
 				nextGroup = new LevelCellGroup(1 + currentPage * 8);

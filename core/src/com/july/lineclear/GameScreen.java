@@ -51,7 +51,7 @@ public class GameScreen extends ScreenAdapter {
 		bestNum = AssetManager.getInstance().record.get(level).get(0);
 		starNum = AssetManager.getInstance().record.get(level).get(1);
 
-		baseTime = 80 - level * 50f / AssetManager.getInstance().totalLevel;
+		baseTime = 90 - level * 50f / AssetManager.getInstance().totalLevel;
 		time = baseTime;
 	}
 
@@ -118,6 +118,9 @@ public class GameScreen extends ScreenAdapter {
 				int row = (int) ((y - Constants.cellY) / Constants.cellHeight);
 				if (gameCells.clicked(row, column, line)) { // 消除
 					removeCells(x, y);
+					SoundManager.getInstance().play(SoundManager.removeMusic);
+				} else {
+					SoundManager.getInstance().play(SoundManager.btnMusic);
 				}
 			}
 		});
@@ -137,6 +140,7 @@ public class GameScreen extends ScreenAdapter {
 				// 失败
 				time = 0;
 				resultDialog.show(ResultDialog.LOSE, scoreNum, 0);
+				SoundManager.getInstance().play(SoundManager.failedMusic);
 			}
 		}
 
@@ -184,7 +188,9 @@ public class GameScreen extends ScreenAdapter {
 			count = 1;
 
 		if (count >= 3 && time < baseTime)
-			time += Gdx.graphics.getDeltaTime();
+			time += 1;
+		if (count == 7)
+			SoundManager.getInstance().play(SoundManager.cheerMusic);
 		// update the star number
 		if (count >= 9)
 			starNum = 3;
@@ -215,7 +221,7 @@ public class GameScreen extends ScreenAdapter {
 		leftCellNum -= 2;
 		if (leftCellNum == 0) {
 			// 闯关成功,更新成绩和星星数
-			Gdx.app.log("wzb", "succeed!");
+			SoundManager.getInstance().play(SoundManager.succeedMusic);
 			AssetManager.getInstance()
 					.updateRecord(levelNum, scoreNum, starNum);
 			resultDialog.show(ResultDialog.WIN, scoreNum, starNum);

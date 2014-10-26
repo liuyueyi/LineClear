@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -78,6 +80,15 @@ public class AssetManager {
 	public int totalLevel = 64;
 	public Map<Integer, Vector<Integer>> record;
 	public FileHandle file;
+
+	// music
+	public Music backMusic;
+	public Music btnMusic;
+	public Music winMusic;
+	public Music loseMusic;
+	public Music cheerMusic;
+	public Sound removeMusic;
+	public Sound flingMusic;
 
 	private AssetManager() {
 
@@ -175,7 +186,18 @@ public class AssetManager {
 	}
 
 	public void loadMusic() {
-
+		backMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/bg.ogg"));
+		backMusic.setVolume(0.4f);
+		btnMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/click.mp3"));
+		winMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/win.ogg"));
+		winMusic.setVolume(1);
+		loseMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/fail.ogg"));
+		loseMusic.setVolume(1);
+		cheerMusic = Gdx.audio.newMusic(Gdx.files
+				.internal("audio/congratulation.ogg"));
+		removeMusic = Gdx.audio
+				.newSound(Gdx.files.internal("audio/remove.ogg"));
+		flingMusic = Gdx.audio.newSound(Gdx.files.internal("audio/change.ogg"));
 	}
 
 	public void loadRecord() {
@@ -246,5 +268,13 @@ public class AssetManager {
 		atlas[2].dispose();
 		font.dispose();
 		defaultFont.dispose();
+
+		backMusic.dispose();
+		btnMusic.dispose();
+		winMusic.dispose();
+		cheerMusic.dispose();
+		loseMusic.dispose();
+		removeMusic.dispose();
+		flingMusic.dispose();
 	}
 }

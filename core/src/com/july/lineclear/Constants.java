@@ -8,8 +8,6 @@ public class Constants {
 	static float wrate = width / 480;
 	static float hrate = height / 800;
 
-	static boolean isSound = true;
-
 	static float adHeight = 60 * hrate;
 	// menu constants
 	static float titleWidth = 240 * wrate;
