@@ -101,6 +101,7 @@ public class GameScreen extends ScreenAdapter {
 			public void clicked(InputEvent event, float x, float y) {
 				// show pause dialog
 				// Gdx.app.log("wzb", "pause button clicked!");
+				SoundManager.getInstance().play(SoundManager.btnMusic);
 				resultDialog.show(ResultDialog.PAUSE, 0, 0);
 			}
 		});
@@ -116,6 +117,9 @@ public class GameScreen extends ScreenAdapter {
 			public void clicked(InputEvent event, float x, float y) {
 				int column = (int) ((x - Constants.cellX) / Constants.cellWidth);
 				int row = (int) ((y - Constants.cellY) / Constants.cellHeight);
+				if (row >= GameCellGroup.ROW || column >= GameCellGroup.COLUMN
+						|| row < 0 || column < 0)
+					return;
 				if (gameCells.clicked(row, column, line)) { // Ïû³ý
 					removeCells(x, y);
 					SoundManager.getInstance().play(SoundManager.removeMusic);
@@ -149,7 +153,8 @@ public class GameScreen extends ScreenAdapter {
 
 		if (Gdx.input.isKeyPressed(Input.Keys.BACK)
 				|| Gdx.input.isKeyPressed(Input.Keys.A)) {
-			game.setScreen(game.menuScreen);
+			SoundManager.getInstance().play(SoundManager.btnMusic);
+			resultDialog.show(ResultDialog.PAUSE, 0, 0);
 		}
 		batch.begin();
 		batch.draw(bg, 0, 0, Constants.width, Constants.height);
@@ -188,7 +193,7 @@ public class GameScreen extends ScreenAdapter {
 			count = 1;
 
 		if (count >= 3 && time < baseTime)
-			time += 1;
+			time += 0.5f;
 		if (count == 7)
 			SoundManager.getInstance().play(SoundManager.cheerMusic);
 		// update the star number

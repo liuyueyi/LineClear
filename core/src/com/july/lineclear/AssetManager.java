@@ -109,7 +109,11 @@ public class AssetManager {
 		font.setScale(Constants.hrate);
 		scoreStyle = new LabelStyle(font, font.getColor());
 
-		defaultFont = new BitmapFont();
+		Texture fonTexture2 = new Texture(Gdx.files.internal("font/num2.png"));
+		fonTexture2.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		defaultFont = new BitmapFont(Gdx.files.internal("font/num2.fnt"),
+				new TextureRegion(fonTexture2), false);
+//		defaultFont = new BitmapFont();
 		style = new LabelStyle(defaultFont, Color.WHITE);
 
 		atlas = new TextureAtlas[3];

@@ -22,6 +22,10 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 	LevelCellGroup nextGroup;
 	int currentPage = 0;
 
+	boolean play = false;
+	float time = 0;
+	int selectLevel;
+
 	public LevelScreen(MainGame game) {
 		this.game = game;
 	}
@@ -43,6 +47,13 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		if (play) {
+			time += Gdx.graphics.getDeltaTime();
+			if (time > Gdx.graphics.getDeltaTime() * 5) {
+				//dispose();
+				game.setScreen(new GameScreen(game, selectLevel));
+			}
+		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.BACK)
 				|| Gdx.input.isKeyPressed(Input.Keys.A)) {
@@ -77,10 +88,12 @@ public class LevelScreen extends ScreenAdapter implements GestureListener {
 		// TODO Auto-generated method stub
 		y = Constants.height - y;
 		for (LevelCell cell : group.array) {
-			if (cell.isClicked(x, y) && cell.getLevel() != -1) {
+			if (cell.isClicked(x, y) && (selectLevel = cell.getLevel()) != -1) {
 				SoundManager.getInstance().play(SoundManager.btnMusic);
-				dispose();
-				game.setScreen(new GameScreen(game, cell.getLevel()));
+				// dispose();
+				// game.setScreen(new GameScreen(game, cell.getLevel()));
+				group.setSelectedAction(selectLevel);
+				play = true;
 			}
 		}
 		return false;

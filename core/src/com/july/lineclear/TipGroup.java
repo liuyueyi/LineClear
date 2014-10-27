@@ -84,7 +84,7 @@ public class TipGroup extends Group {
 			batch.setColor(getColor());
 			batch.draw(
 					zan,
-					getX(),
+					getX() - Constants.cellWidth,
 					getY() - Constants.cellHeight,
 					Constants.cellWidth * 2,
 					Constants.cellWidth * 2 * zan.getRegionHeight()

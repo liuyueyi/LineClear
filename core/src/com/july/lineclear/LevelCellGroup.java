@@ -41,4 +41,14 @@ public class LevelCellGroup extends Group {
 			cell.addMoveInAction(direction);
 		}
 	}
+
+	public void setSelectedAction(int level) {
+		int index = (level - 1) % 8;
+		for (int i = 0; i < 8; i++) {
+			if (i != index)
+				array.get(i).addMoveOutAction(LevelCell.LEFT);
+			else
+				array.get(i).addMoveOutAction(LevelCell.RIGHT);
+		}
+	}
 }

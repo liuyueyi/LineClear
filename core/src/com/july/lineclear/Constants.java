@@ -58,7 +58,7 @@ public class Constants {
 	static float cellWidth = width / (GameCellGroup.COLUMN + 1);
 	static float cellHeight = cellWidth;
 	static float cellX = cellWidth / 2;
-	static float cellY = adHeight;
+	static float cellY = timeY - 4 - GameCellGroup.ROW * cellHeight;
 
 	// dialog constants
 	static float resultWidth = 0.75f * width;
@@ -67,7 +67,7 @@ public class Constants {
 	static float resultY = (height - resultHeight) / 2f;
 	static float starX = resultX + (resultWidth - 4 * starWidth) / 2;
 	static float starAddX = starWidth * 1.5f;
-	static float starY = resultY + (340 - 2* starHeight) / 405f * resultHeight;
+	static float starY = resultY + (340 - 2 * starHeight) / 405f * resultHeight;
 	static float infoWidth = 320f / 450f * resultWidth;
 	static float infoHeight = infoWidth / 4f;
 	static float infoX = resultX + (resultWidth - infoWidth) / 2f;
