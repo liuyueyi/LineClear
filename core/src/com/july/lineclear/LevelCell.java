@@ -95,12 +95,12 @@ public class LevelCell extends Actor {
 					Constants.starWidth, Constants.starHeight);
 		}
 		// draw score
-		AssetManager.getInstance().font.draw(batch, score, getX() + 0.33f
+		AssetManager.getInstance().font.draw(batch, score, getX() + 0.3f
 				* getWidth(), getY() + getHeight() - 10);
 		// draw level
 		if (level != -1)
 			AssetManager.getInstance().font.draw(batch, "" + level, getX()
-					+ addx, getY() + getHeight() - 5);
+					+ addx, getY() + getHeight() - 4);
 		batch.setColor(c);
 	}
 

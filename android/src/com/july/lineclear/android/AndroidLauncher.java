@@ -7,6 +7,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.july.lineclear.MainGame;
 
 public class AndroidLauncher extends AndroidApplication {
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -14,4 +15,5 @@ public class AndroidLauncher extends AndroidApplication {
 		
 		initialize(new MainGame(), config);
 	}
+	
 }

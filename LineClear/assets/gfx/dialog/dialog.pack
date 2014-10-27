@@ -1,0 +1,96 @@
+
+dialog.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+result
+  rotate: false
+  xy: 1, 103
+  size: 450, 408
+  orig: 450, 408
+  offset: 0, 0
+  index: -1
+fail
+  rotate: false
+  xy: 453, 431
+  size: 320, 80
+  orig: 320, 80
+  offset: 0, 0
+  index: -1
+zan
+  rotate: false
+  xy: 775, 376
+  size: 159, 135
+  orig: 159, 135
+  offset: 0, 0
+  index: 0
+zan
+  rotate: false
+  xy: 453, 297
+  size: 222, 132
+  orig: 222, 132
+  offset: 0, 0
+  index: 1
+zan
+  rotate: false
+  xy: 677, 248
+  size: 300, 126
+  orig: 300, 126
+  offset: 0, 0
+  index: 3
+zan
+  rotate: false
+  xy: 453, 169
+  size: 222, 126
+  orig: 222, 126
+  offset: 0, 0
+  index: 4
+rest
+  rotate: false
+  xy: 677, 166
+  size: 320, 80
+  orig: 320, 80
+  offset: 0, 0
+  index: -1
+zan
+  rotate: false
+  xy: 453, 37
+  size: 206, 130
+  orig: 206, 130
+  offset: 0, 0
+  index: 2
+succeed
+  rotate: false
+  xy: 661, 84
+  size: 320, 80
+  orig: 320, 80
+  offset: 0, 0
+  index: -1
+continue
+  rotate: false
+  xy: 661, 33
+  size: 197, 49
+  orig: 197, 49
+  offset: 0, 0
+  index: 0
+continue
+  rotate: false
+  xy: 1, 52
+  size: 197, 49
+  orig: 197, 49
+  offset: 0, 0
+  index: 1
+return
+  rotate: false
+  xy: 200, 52
+  size: 197, 49
+  orig: 197, 49
+  offset: 0, 0
+  index: 0
+return
+  rotate: false
+  xy: 1, 1
+  size: 197, 49
+  orig: 197, 49
+  offset: 0, 0
+  index: 1

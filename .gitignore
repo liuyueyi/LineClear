@@ -61,3 +61,11 @@ build/
 
 ## OS Specific
 .DS_Store
+
+##LineClear
+LineClear/img
+LineClear/libs/armeabi/
+LineClear/libs/armeabi-v7a/
+LineClear/libs/x86/
+LineClear/gen/
+

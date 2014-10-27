@@ -78,4 +78,9 @@ public class Constants {
 	static float btnY = resultY + 20;
 	static float continueBtnX = resultX + 15;
 	static float returnBtnX = resultX + resultWidth - 15 - btnWidth;
+
+	// android choose
+	public static final int MORE = 1;
+	public static final int CHAPIN = 2;
+	public static final int EXIT = 3;
 }
